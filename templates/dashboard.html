@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DC Status Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { font-family: Arial; padding: 20px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+th { background: #222; color: white; }
+</style>
+</head>
+<body>
+
+<h2>Admin Dashboard</h2>
+<p>Last Updated: {{ time }}</p>
+
+<table>
+<tr><th>Domain Controller</th><th>Status</th></tr>
+{% for dc in dcs %}
+<tr>
+<td>{{ dc.name }}</td>
+<td>{{ dc.status }}</td>
+</tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
