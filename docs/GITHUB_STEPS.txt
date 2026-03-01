@@ -1,14 +1,1 @@
-GITHUB UPLOAD STEPS
-
-1. Go to https://github.com
-2. Create account
-3. Click New Repository
-4. Name: DC-Status-Dashboard
-5. Description: Domain Controller monitoring dashboard (starter)
-6. Set to PUBLIC
-7. Click Create Repository
-
-UPLOAD:
-- Add file -> Upload files
-- Drag all files from this folder
-- Commit changes
+GitHub steps placeholder
