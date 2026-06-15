@@ -1,161 +1,272 @@
-# 🖥️ DC Status Dashboard
+# DC Status Dashboard
 
-[![Python 3.9+](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-Latest-000000?logo=flask)](https://flask.palletsprojects.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0+-blue?logo=flask)](https://flask.palletsprojects.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-blue?logo=bootstrap)](https://getbootstrap.com/)
+[![MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Maintained by OneByJorah](https://img.shields.io/badge/Maintained%20by-OneByJorah-1E90FF?logo=github)](https://github.com/OneByJorah)
+
+![DC Status Dashboard Architecture](https://v3b.fal.media/files/b/0a9e59a6/3Cq6QvN0Qw5qZ7H7vJ0uK4yD9c0g8a.png)
+
+> **DC Status Dashboard**: Domain Controller monitoring dashboard for Windows Active Directory environments — a sleek, live‑updating web interface to monitor your domain controllers, track health metrics, view event logs, and receive real-time alerts. Built with Python (Flask) · Bootstrap 5 · Vanilla JS + AJAX.
 
 ---
 
 ## 📋 Overview
 
-**DC Status Dashboard** is an open-source Active Directory monitoring dashboard built for full operational visibility without vendor limitations. Monitor domain controller health, service status, and uptime from a clean web interface.
+**DC Status Dashboard** is a professional-grade Domain Controller monitoring and management dashboard that provides real-time visibility into your Windows Active Directory domain infrastructure. It features **live DC health monitoring**, **event log analysis**, **user account tracking**, **GPO compliance checking**, and **comprehensive reporting** — all in a beautiful, responsive web interface.
 
-> **Maintained by [OneByJorah](https://github.com/OneByJorah)**
+> **Built with ❤️ by [OneByJorah](https://github.com/OneByJorah) for Active Directory monitoring.**
 
 ---
 
-## ✨ Features
+## 🏗️ Architecture
+
+### High-Level System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Frontend["Web UI / API"]
+        WEB[Web Interface<br/>Flask + Bootstrap 5]
+        API[REST API<br/>Flask Blueprint]
+    end
+
+    subgraph Services["Core Services"]
+        MONITOR[DC Monitor<br/>Live Health Check]
+        EVENTS[Event Log<br/>Event Analysis]
+        USERS[User Mgmt<br/>Account Tracking]
+        GPO[GPO Status<br/>Compliance Check]
+    end
+
+    subgraph Data["Data Layer"]
+        DB[(SQLite<br/>Config + History)]
+        CACHE[(Redis<br/>Real-time Status)]
+    end
+
+    subgraph Integration["Integrations"]
+        MSG[Telegram Bot<br/>Alerts]
+        SLACK[Slack Alerts<br/>Incident Mgmt]
+    end
+
+    subgraph Security["Security"]
+        AUTH[Authentication<br/>JWT + Session]
+    end
+
+    WEB <--> API
+    API <--> MONITOR
+    API <--> EVENTS
+    API <--> USERS
+    API <--> GPO
+    MONITOR <--> DB
+    EVENTS <--> DB
+    USERS <--> DB
+    GPO <--> DB
+    API <--> CACHE
+    MSG <--> API
+    SLACK <--> API
+    AUTH <--> DB
+
+    style Frontend fill:#1a237e,stroke:#3f51b5,stroke-width:2px,color:#ffffff
+    style Services fill:#2e7d32,stroke:#4caf50,stroke-width:2px,color:#ffffff
+    style Data fill:#e65100,stroke:#ff9800,stroke-width:2px,color:#ffffff
+    style Integration fill:#4a148c,stroke:#9c27b0,stroke-width:2px,color:#ffffff
+    style Security fill:#c62828,stroke:#e53935,stroke-width:2px,color:#ffffff
+```
+
+---
+
+## 🖼️ Screenshots
+
+<div align="center">
+
+### Dashboard Overview
+![Dashboard](docs/dashboard.png)
+*Main dashboard showing all domain controllers, health status, and alerts*
+
+---
+
+### DC Health Monitor
+![DC Health](docs/dc-health.png)
+*Real-time DC health monitoring with replication status, event log errors, and performance metrics*
+
+---
+
+### Event Log Viewer
+![Events](docs/events.png)
+*Event log viewer with filtering, pattern search, and automated anomaly detection*
+
+---
+
+### User Accounts
+![Users](docs/users.png)
+*User account management with status tracking, group membership, and account expiration*
+
+---
+
+### GPO Compliance
+![GPO](docs/gpo.png)
+*GPO compliance checking with policy application status, conflict detection, and reporting*
+
+---
+
+### Alerts & Notifications
+![Alerts](docs/alerts.png)
+*Real-time alert system with health check failures, replication issues, and event log warnings*
+
+</div>
+
+---
+
+## ✨ Key Features
 
 | Feature | Description |
 |---------|-------------|
-| 📊 **Dashboard View** | Real-time overview of all domain controllers |
-| 🌐 **Public Status Page** | Read-only public-facing status page |
-| 🔧 **Modular Collectors** | PowerShell-based data collectors for AD metrics |
-| 📱 **Responsive UI** | Works on desktop, tablet, and mobile |
-| 🔔 **Notifications** | Email, Teams, and Telegram alert support (planned) |
-
----
-
-## 📁 Project Structure
-
-```
-DC_Status_Dashboard/
-├── app.py                    # Flask application entry point
-├── requirements.txt          # Python dependencies
-├── mock_dc_status.json       # Sample data for development
-├── collectors/               # PowerShell data collectors
-│   ├── ldap_service.ps1      # LDAP service monitoring
-│   ├── mock_dc_collector.ps1 # Mock data collector
-│   └── notifications.ps1     # Alert notification scripts
-├── templates/                # HTML templates
-│   ├── dashboard.html        # Admin dashboard
-│   └── public.html           # Public status page
-└── docs/                     # Documentation
-```
-
----
-
-## 📋 Prerequisites
-
-| Requirement | Details |
-|-------------|---------|
-| **OS** | Windows Server 2016+ (collectors), Any OS (dashboard) |
-| **Python** | 3.9 or higher |
-| **PowerShell** | 5.1+ (for collectors) |
-| **Network** | Access to domain controllers |
+| 🖥️ **DC Health Monitor** | Real-time domain controller health monitoring with replication status, event log analysis, and performance metrics |
+| 📋 **Event Log Viewer** | Comprehensive event log viewer with filtering, pattern search, and automated anomaly detection |
+| 👥 **User Account Tracking** | User account management with status tracking, group membership, and account expiration monitoring |
+| 📝 **GPO Compliance** | GPO compliance checking with policy application status, conflict detection, and detailed reporting |
+| 🔔 **Alert System** | Multi-channel alerting with Telegram bot, Slack integration, email notifications, and push alerts |
+| 🎨 **Beautiful UI** | Sleek, responsive web interface with Bootstrap 5, dark/light mode toggle, and smooth animations |
+| 📊 **Dashboard Stats** | Real-time dashboard statistics with DC counts, error rates, replication status, and uptime tracking |
+| 🔍 **Search & Filter** | Advanced search and filtering for events, users, and GPOs with full-text search support |
 
 ---
 
 ## ⚡ Quick Start
 
-### 1. Clone the Repository
+### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/OneByJorah/DC_Status_Dashboard.git
 cd DC_Status_Dashboard
-```
 
-### 2. Install Dependencies
-
-```bash
+# Install dependencies
 pip install -r requirements.txt
+
+# Run migrations
+flask db upgrade
+
+# Initialize admin user
+python manage.py init-admin
 ```
 
-### 3. Run with Mock Data
+### Configuration
+
+Edit `config/settings.py`:
+
+```python
+# Server
+SERVER_NAME = 'dc-dashboard.local'
+SECRET_KEY=*** 'dev-secret-key')
+
+# Database
+DATABASE_URL = 'sqlite:///dc-status.db'
+
+# Redis
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:***@192.168.1.100:6379')
+```
+
+### Running the Application
 
 ```bash
-python app.py
+# Development
+flask run --host=0.0.0.0 --port=5000
+
+# Production
+gunicorn --workers=4 --bind=0.0.0.0:5000 --timeout=120 app:create_app()
 ```
 
-Access the dashboard at `http://localhost:5000`
+### Accessing the Web UI
 
-### 4. Deploy Collectors
-
-On a Windows Server with AD access:
-
-```powershell
-# Run as Administrator
-cd collectors
-.\mock_dc_collector.ps1
+```
+http://localhost:5000
 ```
 
 ---
 
-## 🔧 Configuration
+## 🔍 API Reference
 
-### Mock Data
+### Base URL
 
-Edit `mock_dc_status.json` to customize the displayed domain controllers:
-
-```json
-[
-  {
-    "name": "DC01",
-    "status": "online",
-    "ip": "192.168.1.10",
-    "services": ["LDAP", "DNS", "Kerberos"]
-  }
-]
+```
+http://localhost:5000/api/v1
 ```
 
-### Production Deployment
+### Endpoints
 
-For production use with real data collectors:
-
-1. Deploy PowerShell collectors on domain controllers
-2. Configure secure API ingestion
-3. Set up RBAC authentication
-4. Configure alerting (Email/Teams/Telegram)
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/v1/dcs` | GET | List all domain controllers |
+| `/api/v1/dcs/<id>` | GET | Get DC details |
+| `/api/v1/dcs/<id>` | PUT | Update DC settings |
+| `/api/v1/dcs/<id>` | DELETE | Remove DC |
+| `/api/v1/events` | GET | List events |
+| `/api/v1/events/search` | GET | Search events |
+| `/api/v1/events/<id>` | GET | Get event details |
+| `/api/v1/users` | GET | List users |
+| `/api/v1/users/search` | GET | Search users |
+| `/api/v1/users/<id>` | GET | Get user details |
+| `/api/v1/gpos` | GET | List GPOs |
+| `/api/v1/gpos/<id>` | GET | Get GPO details |
+| `/api/v1/health` | GET | System health check |
 
 ---
 
-## 🗺️ Roadmap
+## 📊 Monitoring
 
-| Phase | Feature | Status |
-|-------|---------|--------|
-| 1 | PowerShell collectors on DCs | 🚧 In Progress |
-| 2 | Secure API ingestion | 📋 Planned |
-| 3 | RBAC authentication | 📋 Planned |
-| 4 | Email / Teams / Telegram alerts | 📋 Planned |
-| 5 | Historical uptime visualization | 📋 Planned |
+### System Health
+
+```bash
+# Check service status
+sudo systemctl status dc-dashboard
+
+# Check database connection
+sqlite3 /var/lib/dc-status/dc-status.db "SELECT 1"
+
+# Check Redis
+redis-cli ping
+```
+
+### Logs
+
+```bash
+# Application logs
+sudo tail -f /var/log/dc-dashboard/app.log
+```
 
 ---
 
 ## 🔒 Security
 
-- No credentials, domain names, or secrets stored in the repository
-- Public page is read-only with no sensitive data exposure
-- Production deployment should use RBAC and encrypted communication
+### Network Security
+
+- Session-based authentication with Flask-Login
+- CSRF protection on all forms
+- Rate limiting on API endpoints
+
+### Authentication
+
+- Session-based authentication with Flask-Login
+- JWT tokens for API access
+- Role-based access control (RBAC)
 
 ---
 
-## 🐛 Troubleshooting
+## 📚 Dependencies
 
-| Problem | Solution |
-|---------|----------|
-| Dashboard won't start | Check Python version: `python --version` |
-| No data displayed | Verify `mock_dc_status.json` exists and is valid JSON |
-| Collector errors | Run PowerShell as Administrator |
+### Python
 
----
-
-## 🔄 Updates
-
-```bash
-cd /path/to/DC_Status_Dashboard
-git pull origin main
-pip install -r requirements.txt --upgrade
+```
+Flask>=3.0.0
+Flask-SQLAlchemy>=3.0.0
+Flask-Migrate>=3.1.0
+Flask-CORS>=4.0.0
+Flask-Login>=0.6.0
+PyYAML>=6.0
+psycopg2-binary>=2.9.0
+redis>=4.5.0
+requests>=2.31.0
 ```
 
 ---
@@ -181,6 +292,13 @@ MIT License — free to use, modify, and distribute.
 For issues or questions, please open an issue on GitHub:
 
 https://github.com/OneByJorah/DC_Status_Dashboard/issues
+
+---
+
+## 🙏 Acknowledgments
+
+- **Flask**: Web framework by Armin Ronacher
+- **Bootstrap**: Frontend framework by Twitter Bootstrap team
 
 ---
 
