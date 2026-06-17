@@ -138,8 +138,8 @@ flowchart TB
 
 ```bash
 # Clone the repository
-git clone https://github.com/OneByJorah/DC_Status_Dashboard.git
-cd DC_Status_Dashboard
+git clone https://github.com/OneByJorah/ADSentinel.git
+cd ADSentinel
 
 # Install dependencies
 pip install -r requirements.txt
@@ -291,7 +291,7 @@ MIT License — free to use, modify, and distribute.
 
 For issues or questions, please open an issue on GitHub:
 
-https://github.com/OneByJorah/DC_Status_Dashboard/issues
+https://github.com/OneByJorah/ADSentinel/issues
 
 ---
 
