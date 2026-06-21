@@ -1,6 +1,6 @@
-# ADSentinel (ADSentinel)
+# ADSentinel — Active Directory Monitoring Dashboard
 
-**Version:** v0.1  
+**Version:** v1.0  
 **Status:** Active Development  
 **Repository:** https://github.com/OneByJorah/ADSentinel
 
@@ -24,34 +24,42 @@
 
 ## Overview
 
-Active Directory monitoring dashboard with health checks, replication, and alerting.
+ADSentinel is an Active Directory monitoring dashboard focused on health checks, replication status, and alerting. It provides a web-based view into domain controller state and includes mock/test collectors for environments where live DC connectivity isn’t available.
+
+Targets Windows-based AD environments with PowerShell collectors, and renders a responsive HTML dashboard.
 
 ---
 
 ## Architecture
 
-Client → Local service (`ADSentinel`) → data/processing modules → output/api layer.
-Secrets and environment configuration are managed via environment files with restrictive permissions.
+Client → Flask backend (`app.py`) → collectors (PowerShell/Mock JSON) → templates (`dashboard.html`, `public.html`) → browser UI.
+
+Data paths:
+- Mock collector: `mock_dc_status.json`
+- Templates: `templates/dashboard.html`, `templates/public.html`
+- Assets: `assets/screenshot.png`
 
 ---
 
 ## Technology Stack
 
-|| Layer | Stack |
+| Layer | Stack |
 |---|---|
-| Runtime | Linux (Ubuntu 22.04+) |
-| Primary Stack | HTML5 / JavaScript |
+| Runtime | Linux/Windows (PowerShell collectors) |
+| Backend | Python / Flask |
+| Collectors | PowerShell 5.1+ |
+| Frontend | HTML5 (Jinja2 templates) |
 | VCS | Git + GitHub (`github.com/OneByJorah/ADSentinel`) |
-| Dev Port | Localhost / systemd service |
 
 ---
 
 ## Features
 
-- Operational dashboard and monitoring (per repo).
-- Exportable data / reports where supported.
-- Extensible service-based design.
-- Dark-themed UI where applicable.
+- **DC health monitoring**: domain controller status and replication checks.
+- **Alerting**: notifications via collector logic.
+- **Mock/test mode**: uses `mock_dc_status.json` for offline development.
+- **Responsive dashboard**: public and private (admin) views.
+- **Lightweight**: Flask + SQLite-style JSON state, easy to self-host.
 
 ---
 
@@ -63,23 +71,25 @@ git clone https://github.com/OneByJorah/ADSentinel.git
 cd ADSentinel
 
 # 2. Install dependencies
-# (see specific subproject docs)
+pip install -r requirements.txt
 
-# 3. Start the service
-# (see Service Management below)
+# 3. Run the app
+python3 app.py
 ```
+
+Visit `http://localhost:5000`.
+
+> Note: PowerShell collectors are intended for Windows hosts. On Linux, use the mock data path for UI development.
 
 ---
 
 ## Service Management
 
 ```bash
-# Start the service (example)
-sudo systemctl start ADSentinel.service
-sudo systemctl enable ADSentinel.service
+# Example systemd unit location: systemd/pirouter.service (adapt for app.py)
+# For quick testing without systemd, run:
+python3 app.py
 ```
-
-Access the service via your configured localhost port or reverse proxy.
 
 ---
 
@@ -87,24 +97,38 @@ Access the service via your configured localhost port or reverse proxy.
 
 ```
 ADSentinel/
-├── README.md
-├── (additional project files)
+├── app.py
+├── requirements.txt
+├── init_db.py
+├── start.sh
+├── collectors/
+│   ├── ldap_service.ps1
+│   ├── mock_dc_collector.ps1
+│   └── notifications.ps1
+├── templates/
+│   ├── dashboard.html
+│   └── public.html
+├── assets/
+│   └── screenshot.png
+├── docs/
+│   ├── GITHUB_STEPS.txt
+│   └── ROADMAP.md
+└── systemd/
 ```
 
 ---
 
 ## Screenshots
 
-All screenshots are live captures from the local dev instance.
-
-_(Screenshots will be added after build/run capture.)_
+### ADSentinel Dashboard
+![ADSentinel Dashboard](assets/screenshot.png)
 
 ---
 
 ## Contributing
 
 1. Create a feature branch off `main`.
-2. Follow the existing code style.
+2. Test mock mode locally before submitting collector changes.
 3. Submit a PR with description and screenshots for UI changes.
 
 ---
