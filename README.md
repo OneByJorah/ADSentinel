@@ -79,6 +79,8 @@ python3 app.py
 
 Visit `http://localhost:5000`.
 
+Health check: `http://localhost:5000/health`
+
 > Note: PowerShell collectors are intended for Windows hosts. On Linux, use the mock data path for UI development.
 
 ---
