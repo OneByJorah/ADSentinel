@@ -1,0 +1,107 @@
+[
+  {
+    "file": "app.py",
+    "line_range": "4",
+    "issue": "Missing dunder in Flask(__name__) - should be Flask(__name__) with double underscores on each side",
+    "severity": "high",
+    "suggested_fix": "Change Flask(__name__) to Flask(__name__)"
+  },
+  {
+    "file": "app.py",
+    "line_range": "7-8",
+    "issue": "File open operation without error handling - will crash if mock_dc_status.json is missing or unreadable",
+    "severity": "high",
+    "suggested_fix": "Wrap in try/except block: try: with open(...) except FileNotFoundError: data = [] or handle appropriately"
+  },
+  {
+    "file": "app.py",
+    "line_range": "19",
+    "issue": "Invalid placeholder host='[IP_ADDRESS]' - will cause server startup failure",
+    "severity": "high",
+    "suggested_fix": "Replace with valid host like 0.0.0.0 or 127.0.0.1"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "37",
+    "issue": "Invalid CSS color value '#[ADDRESS]' - placeholder causes CSS parsing error",
+    "severity": "high",
+    "suggested_fix": "Replace with valid hex color like #ef4444 or use a CSS color name"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "48",
+    "issue": "Invalid CSS color value '#[ADDRESS]' - placeholder causes CSS parsing error",
+    "severity": "high",
+    "suggested_fix": "Replace with valid hex color like #ef4444"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "52",
+    "issue": "Invalid CSS border-color value 'border-color: [PERSON_NAME])' - malformed placeholder string",
+    "severity": "high",
+    "suggested_fix": "Replace with valid value like border-color: #10b981"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "73",
+    "issue": "Invalid media query '[PERSON_NAME]-width: [ADDRESS]' - placeholder breaks media query parsing",
+    "severity": "medium",
+    "suggested_fix": "Replace with valid pixel value like max-width: 768px"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "243",
+    "issue": "JavaScript ReferenceError: event is not defined in showPage function scope - event.target will throw error",
+    "severity": "medium",
+    "suggested_fix": "Change function signature to function showPage(page, event) and pass event from onclick handlers"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "239-244",
+    "issue": "JavaScript missing error handling - no try/catch for DOM operations that may fail",
+    "severity": "medium",
+    "suggested_fix": "Add try/catch wrapper around DOM manipulation code"
+  },
+  {
+    "file": "app.py",
+    "line_range": "8",
+    "issue": "No JSON parsing error handling - will crash if mock_dc_status.json contains invalid JSON",
+    "severity": "medium",
+    "suggested_fix": "Wrap json.load() in try/except for JSONDecodeError"
+  },
+  {
+    "file": "templates/dashboard.html",
+    "line_range": "112-247",
+    "issue": "Template ignores injected dc_data variable - all data is hardcoded instead of dynamically rendered",
+    "severity": "medium",
+    "suggested_fix": "Use Jinja2 templating with {{ dc_data }} to render dynamic data"
+  },
+  {
+    "file": "app.py",
+    "line_range": "10-16",
+    "issue": "No route error handlers - missing 404 and 500 error handlers",
+    "severity": "low",
+    "suggested_fix": "Add @app.errorhandler(404) and @app.errorhandler(500) handlers"
+  },
+  {
+    "file": "app.py",
+    "line_range": "18-19",
+    "issue": "No logging configured - production applications should have proper logging",
+    "severity": "low",
+    "suggested_fix": "Add logging configuration and use app.logger for startup/shutdown events"
+  },
+  {
+    "file": "mock_dc_status.json",
+    "line_range": "1",
+    "issue": "Empty JSON array - provides no meaningful mock data for the application",
+    "severity": "low",
+    "suggested_fix": "Populate with sample datacenter status data structure"
+  },
+  {
+    "file": "requirements.txt",
+    "line_range": "1",
+    "issue": "Only Flask listed - missing security and production dependencies like werkzeug, gunicorn",
+    "severity": "low",
+    "suggested_fix": "Add werkzeug, gunicorn, and other necessary production packages"
+  }
+]
