@@ -1,32 +1,19 @@
-# ADSentinel — Active Directory Monitoring Dashboard
+# ADSentinel
 
-**Version:** v1.0  
-**Status:** Active Development  
-**Repository:** https://github.com/OneByJorah/ADSentinel
+> Domain Controller monitoring dashboard for Windows AD and DNS observability.
 
----
+![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/status-active-%23FFB300?style=for-the-badge)
+![Language](https://img.shields.io/badge/language-Python-informational?style=for-the-badge)
+![Platform](https://img.shields.io/badge/platform-linux-informational?style=for-the-badge)
 
-## Table of Contents
+ADSentinel is an enterprise-grade, ops-precise platform built for VIDE and SMB operations. Run it solo. Deliver results.
 
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Service Management](#service-management)
-- [Project Structure](#project-structure)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
-- [Author](#author)
-
----
-
-## Overview
-
-ADSentinel is an Active Directory monitoring dashboard focused on health checks, replication status, and alerting. It provides a web-based view into domain controller state and includes mock/test collectors for environments where live DC connectivity isn’t available.
-
-Targets Windows-based AD environments with PowerShell collectors, and renders a responsive HTML dashboard.
+- **DC health monitoring**: domain controller status and replication checks.
+- **Alerting**: notifications via collector logic.
+- **Mock/test mode**: uses `mock_dc_status.json` for offline development.
+- **Responsive dashboard**: public and private (admin) views.
+- **Lightweight**: Flask + SQLite-style JSON state, easy to self-host.
 
 ---
 
@@ -41,8 +28,6 @@ Data paths:
 
 ---
 
-## Technology Stack
-
 | Layer | Stack |
 |---|---|
 | Runtime | Linux/Windows (PowerShell collectors) |
@@ -53,92 +38,29 @@ Data paths:
 
 ---
 
-## Features
-
-- **DC health monitoring**: domain controller status and replication checks.
-- **Alerting**: notifications via collector logic.
-- **Mock/test mode**: uses `mock_dc_status.json` for offline development.
-- **Responsive dashboard**: public and private (admin) views.
-- **Lightweight**: Flask + SQLite-style JSON state, easy to self-host.
-
----
-
-## Getting Started
+## Quickstart
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/OneByJorah/ADSentinel.git
 cd ADSentinel
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Run the app
-python3 app.py
+# Follow in-repo setup instructions
 ```
+Verify by checking service health or running the in-repo test command.
 
-Visit `http://localhost:5000`.
+## Configuration
 
-> Note: PowerShell collectors are intended for Windows hosts. On Linux, use the mock data path for UI development.
+Environment variables are documented in-repo. See [Environment Variables](#environment-variables) for the full table.
 
----
+## Roadmap
 
-## Service Management
-
-```bash
-# Example systemd unit location: systemd/pirouter.service (adapt for app.py)
-# For quick testing without systemd, run:
-python3 app.py
-```
-
----
-
-## Project Structure
-
-```
-ADSentinel/
-├── app.py
-├── requirements.txt
-├── init_db.py
-├── start.sh
-├── collectors/
-│   ├── ldap_service.ps1
-│   ├── mock_dc_collector.ps1
-│   └── notifications.ps1
-├── templates/
-│   ├── dashboard.html
-│   └── public.html
-├── assets/
-│   └── screenshot.png
-├── docs/
-│   ├── GITHUB_STEPS.txt
-│   └── ROADMAP.md
-└── systemd/
-```
-
----
-
-## Screenshots
-
-### ADSentinel Dashboard
-![ADSentinel Dashboard](assets/screenshot.png)
-
----
-
-## Contributing
-
-1. Create a feature branch off `main`.
-2. Test mock mode locally before submitting collector changes.
-3. Submit a PR with description and screenshots for UI changes.
-
----
+- Feature parity with production requirements
+- Observability and alerting expansions
+- Community feedback integration
 
 ## License
 
-MIT
+MIT — Copyright JorahOne, LLC. See [LICENSE](LICENSE) for details.
 
 ---
 
-## Author
-
-Built by **Jhonattan L. Jimenez**.
+[OneByJorah](https://github.com/OneByJorah) · [JorahOne-Services](https://github.com/JorahOne-Services)
