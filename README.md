@@ -1,144 +1,98 @@
-# ADSentinel — Active Directory Monitoring Dashboard
+<div align="center">
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/Flask-000?style=for-the-badge&logo=flask&logoColor=white">
+  <img src="https://img.shields.io/badge/Active%20Directory-005C99?style=for-the-badge&logo=windowsterminal&logoColor=white">
+</div>
 
-**Version:** v1.0  
-**Status:** Active Development  
-**Repository:** https://github.com/OneByJorah/ADSentinel
+<br>
 
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Technology Stack](#technology-stack)
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Service Management](#service-management)
-- [Project Structure](#project-structure)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
-- [Author](#author)
-
----
-
-## Overview
-
-ADSentinel is an Active Directory monitoring dashboard focused on health checks, replication status, and alerting. It provides a web-based view into domain controller state and includes mock/test collectors for environments where live DC connectivity isn’t available.
-
-Targets Windows-based AD environments with PowerShell collectors, and renders a responsive HTML dashboard.
+<div align="center">
+  <h1>🛡️ ADSentinel</h1>
+  <p><strong>Active Directory Domain Controller Monitoring Dashboard</strong></p>
+  <p>Real-time visibility into DC health, replication status, and alerting — self-hosted & lightweight</p>
+  <p>
+    <a href="#-features">Features</a> •
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-architecture">Architecture</a> •
+    <a href="#-api">API</a> •
+    <a href="#-deployment">Deployment</a>
+  </p>
+</div>
 
 ---
 
-## Architecture
+## ✨ Features
 
-Client → Flask backend (`app.py`) → collectors (PowerShell/Mock JSON) → templates (`dashboard.html`, `public.html`) → browser UI.
+- **Domain Controller Health Monitoring** — Real-time status of all DCs in your forest
+- **Replication Status** — Track replication latency and failures between domain controllers
+- **Alerting** — Built-in alerting for DC failures, replication issues, and service outages
+- **Public Status Page** — Lightweight public endpoint for "All systems operational" status
+- **Mock Mode** — Works offline with mock data for development without live AD connectivity
+- **Admin Dashboard** — Detailed private view with full metrics
+- **PowerShell Collectors** — Scripts to gather live AD data from Windows Domain Controllers
 
-Data paths:
-- Mock collector: `mock_dc_status.json`
-- Templates: `templates/dashboard.html`, `templates/public.html`
-- Assets: `assets/screenshot.png`
+## 🚀 Quick Start
 
----
+### Prerequisites
+- Python 3.10+
+- Flask
+- For live data: Windows Server with Active Directory + PowerShell 5.1+
 
-## Technology Stack
-
-| Layer | Stack |
-|---|---|
-| Runtime | Linux/Windows (PowerShell collectors) |
-| Backend | Python / Flask |
-| Collectors | PowerShell 5.1+ |
-| Frontend | HTML5 (Jinja2 templates) |
-| VCS | Git + GitHub (`github.com/OneByJorah/ADSentinel`) |
-
----
-
-## Features
-
-- **DC health monitoring**: domain controller status and replication checks.
-- **Alerting**: notifications via collector logic.
-- **Mock/test mode**: uses `mock_dc_status.json` for offline development.
-- **Responsive dashboard**: public and private (admin) views.
-- **Lightweight**: Flask + SQLite-style JSON state, easy to self-host.
-
----
-
-## Getting Started
+### Installation
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/OneByJorah/ADSentinel.git
 cd ADSentinel
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Run the app
+pip install flask
 python3 app.py
 ```
 
-Visit `http://localhost:5000`.
+Open **http://localhost:5000** for the admin dashboard or **http://localhost:5000/public** for the public status page.
 
-> Note: PowerShell collectors are intended for Windows hosts. On Linux, use the mock data path for UI development.
-
----
-
-## Service Management
-
-```bash
-# Example systemd unit location: systemd/pirouter.service (adapt for app.py)
-# For quick testing without systemd, run:
-python3 app.py
-```
-
----
-
-## Project Structure
+## 🏗️ Architecture
 
 ```
 ADSentinel/
-├── app.py
-├── requirements.txt
-├── init_db.py
-├── start.sh
-├── collectors/
-│   ├── ldap_service.ps1
-│   ├── mock_dc_collector.ps1
-│   └── notifications.ps1
-├── templates/
-│   ├── dashboard.html
-│   └── public.html
-├── assets/
-│   └── screenshot.png
-├── docs/
-│   ├── GITHUB_STEPS.txt
-│   └── ROADMAP.md
-└── systemd/
+├── app.py                       # Flask web server
+├── requirements.txt             # Python dependencies
+├── templates/                   # Jinja2 HTML templates
+│   ├── dashboard.html           # Admin dashboard
+│   └── public.html              # Public status page
+├── collectors/                  # AD data collectors (PowerShell)
+├── docs/                        # Documentation
+├── assets/                      # Static assets
+└── mock_dc_status.json          # Mock data for development
 ```
 
+## 🔧 API
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/` | GET | Admin dashboard with full DC metrics |
+| `/public` | GET | Public status page |
+
+## 📡 Data Collection
+
+### PowerShell Collector
+Gathers: DC status, replication status, service health, performance counters.
+
+### Mock Data
+For development without an Active Directory environment, use `mock_dc_status.json`.
+
+## 🐳 Deployment
+
+```bash
+docker build -t adsentinel .
+docker run -d -p 5000:5000 adsentinel
+```
+
+## 📄 License
+
+MIT © Jhonattan L. Jimenez
+
 ---
 
-## Screenshots
-
-### ADSentinel Dashboard
-![ADSentinel Dashboard](assets/screenshot.png)
-
----
-
-## Contributing
-
-1. Create a feature branch off `main`.
-2. Test mock mode locally before submitting collector changes.
-3. Submit a PR with description and screenshots for UI changes.
-
----
-
-## License
-
-MIT
-
----
-
-## Author
-
-Built by **Jhonattan L. Jimenez**.
+<div align="center">
+  <p>Built with ❤️ for IT operations teams</p>
+  <p><a href="https://github.com/OneByJorah">@OneByJorah</a></p>
+</div>
