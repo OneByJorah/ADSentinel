@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "name": "DC-01",
+    "status": "online",
+    "ip": "10.0.1.10",
+    "role": "Primary",
+    "cpu": 45,
+    "memory": 62,
+    "disk": 58,
+    "temperature": 58,
+    "services": ["DNS", "DHCP", "ADWS"],
+    "last_check": "2024-06-15 02:30:00"
+  },
+  {
+    "name": "DC-02",
+    "status": "online",
+    "ip": "10.0.1.11",
+    "role": "Secondary",
+    "cpu": 22,
+    "memory": 35,
+    "disk": 42,
+    "temperature": 52,
+    "services": ["DNS", "ADWS"],
+    "last_check": "2024-06-15 02:30:00"
+  },
+  {
+    "name": "DC-03",
+    "status": "offline",
+    "ip": "10.0.2.10",
+    "role": "Backup",
+    "cpu": 0,
+    "memory": 0,
+    "disk": 0,
+    "temperature": 0,
+    "services": [],
+    "last_check": "2024-06-14 18:00:00"
+  }
+]

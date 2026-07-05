@@ -18,5 +18,9 @@ dist/
 build/
 *.egg-info/
 *.so
+# Tests
+.pytest_cache/
+.pytest_cache
+
 # Logs
 *.log

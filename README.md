@@ -79,11 +79,34 @@ Gathers: DC status, replication status, service health, performance counters.
 ### Mock Data
 For development without an Active Directory environment, use `mock_dc_status.json`.
 
+## 🖼️ Preview
+
+> Screenshot pending — will be captured once the app is deployed and accessible at `http://localhost:5000`.
+
 ## 🐳 Deployment
 
 ```bash
 docker build -t adsentinel .
 docker run -d -p 5000:5000 adsentinel
+```
+
+## ⚙️ Configuration
+
+| Variable | Description | Default |
+|----------|-------------|--------|
+| `SECRET_KEY` | Flask secret key (generate via `python3 -c "import secrets; print(secrets.token_hex(32))"`) | `your-secret-key-here` |
+| `FLASK_DEBUG` | Enable debug mode for development | `False` |
+| `HOST` | Server bind address | `0.0.0.0` |
+| `PORT` | Server port | `5000` |
+| `MOCK_DATA_PATH` | Path to mock data JSON file | `mock_dc_status.json` |
+
+Copy `.env.example` to `.env` and fill in your values.
+
+## 🧪 Tests
+
+```bash
+pip install pytest
+pytest tests/ -v
 ```
 
 ## 📄 License
