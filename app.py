@@ -1,4 +1,5 @@
 import json
+import os
 
 from flask import Flask, render_template
 
@@ -10,7 +11,7 @@ with open("mock_dc_status.json", "r") as f:
 
 @app.route("/")
 def dashboard():
-    return render_template("dashboard.html", dc_data=data)
+    return render_template("dashboard.html", dc_data=data, ext_ip=os.getenv("EXTERNAL_IP", "127.0.0.1"))
 
 @app.route("/public")
 def public():
