@@ -19,6 +19,8 @@
   </p>
 </div>
 
+![ADSentinel Dashboard](assets/screenshot.png)
+
 ---
 
 ## ✨ Features
@@ -70,6 +72,7 @@ ADSentinel/
 |----------|--------|-------------|
 | `/` | GET | Admin dashboard with full DC metrics |
 | `/public` | GET | Public status page |
+| `/health` | GET | Health check endpoint (returns JSON status) |
 
 ## 📡 Data Collection
 
@@ -81,10 +84,22 @@ For development without an Active Directory environment, use `mock_dc_status.jso
 
 ## 🐳 Deployment
 
+Docker support is planned. See the [Roadmap](ROADMAP.md) for details.
+
+## 🧪 Testing
+
 ```bash
-docker build -t adsentinel .
-docker run -d -p 5000:5000 adsentinel
+pip install pytest
+pytest tests/
 ```
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## 🔒 Security
+
+See [SECURITY.md](SECURITY.md) for our security policy and vulnerability reporting process.
 
 ## 📄 License
 
