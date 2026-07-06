@@ -1,5 +1,10 @@
 
-# Mock DC Collector - outputs JSON
+<#
+.SPDX-License-Identifier: MIT
+.SPDX-FileCopyrightText: 2026 OneByJorah
+
+Mock DC Collector - outputs JSON
+#>
 
 function Get-MockDCStatus {
     $dcList = @(
