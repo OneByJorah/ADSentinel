@@ -1,98 +1,72 @@
+<!-- j1-brand:v2 -->
 <div align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/Flask-000?style=for-the-badge&logo=flask&logoColor=white">
-  <img src="https://img.shields.io/badge/Active%20Directory-005C99?style=for-the-badge&logo=windowsterminal&logoColor=white">
-</div>
 
-<br>
+# ADSentinel
 
-<div align="center">
-  <h1>🛡️ ADSentinel</h1>
-  <p><strong>Active Directory Domain Controller Monitoring Dashboard</strong></p>
-  <p>Real-time visibility into DC health, replication status, and alerting — self-hosted & lightweight</p>
-  <p>
-    <a href="#-features">Features</a> •
-    <a href="#-quick-start">Quick Start</a> •
-    <a href="#-architecture">Architecture</a> •
-    <a href="#-api">API</a> •
-    <a href="#-deployment">Deployment</a>
-  </p>
+A lightweight, self-hosted Active Directory Domain Controller monitoring dashboard — real-time DC health, replication status, and service outage alerts.
+
+[![GitHub](https://img.shields.io/badge/github-OneByJorah%2FADSentinel-FFB300?style=for-the-badge&labelColor=0d0d0c)](https://github.com/OneByJorah/ADSentinel)
+[![License](https://img.shields.io/badge/license-MIT-FFB300?style=for-the-badge&labelColor=0d0d0c)](LICENSE)
+[![Language](https://img.shields.io/badge/HTML-FFB300?style=for-the-badge&labelColor=0d0d0c)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![Built by](https://img.shields.io/badge/built%20by-JorahOne%20LLC-FFB300?style=for-the-badge&labelColor=0d0d0c)](https://github.com/OneByJorah)
+
 </div>
 
 ---
 
-## ✨ Features
+## Why This Exists
 
-- **Domain Controller Health Monitoring** — Real-time status of all DCs in your forest
-- **Replication Status** — Track replication latency and failures between domain controllers
-- **Alerting** — Built-in alerting for DC failures, replication issues, and service outages
-- **Public Status Page** — Lightweight public endpoint for "All systems operational" status
-- **Mock Mode** — Works offline with mock data for development without live AD connectivity
-- **Admin Dashboard** — Detailed private view with full metrics
-- **PowerShell Collectors** — Scripts to gather live AD data from Windows Domain Controllers
+Domain Controllers are the backbone of any Windows network — when a DC goes down, everything stops. ADSentinel gives you a lightweight dashboard for monitoring DC health and replication status, with separate Admin and public-facing status views. PowerShell collectors pull data from Windows DCs, and a mock mode lets you develop without live servers.
 
-## 🚀 Quick Start
+## Key Features
 
-### Prerequisites
-- Python 3.10+
-- Flask
-- For live data: Windows Server with Active Directory + PowerShell 5.1+
+| Feature | Why It Matters |
+|---|---|
+| Real-time DC health monitoring | See the status of all Domain Controllers at a glance |
+| Replication status tracking | Detect replication failures before they cause outages |
+| Public status page | Share a read-only view with stakeholders |
+| PowerShell collectors | Lightweight agentless data collection from Windows DCs |
+| Mock mode | Develop and test without connecting to live infrastructure |
 
-### Installation
+## Quick Start
 
 ```bash
 git clone https://github.com/OneByJorah/ADSentinel.git
 cd ADSentinel
-pip install flask
+pip install -r requirements.txt
 python3 app.py
 ```
 
-Open **http://localhost:5000** for the admin dashboard or **http://localhost:5000/public** for the public status page.
+- Admin dashboard: `http://localhost:5000`
+- Public status page: `http://localhost:5000/public`
 
-## 🏗️ Architecture
+## Architecture
 
 ```
-ADSentinel/
-├── app.py                       # Flask web server
-├── requirements.txt             # Python dependencies
-├── templates/                   # Jinja2 HTML templates
-│   ├── dashboard.html           # Admin dashboard
-│   └── public.html              # Public status page
-├── collectors/                  # AD data collectors (PowerShell)
-├── docs/                        # Documentation
-├── assets/                      # Static assets
-└── mock_dc_status.json          # Mock data for development
+┌──────────────┐     ┌──────────────┐
+│  Windows DCs  │────▶│  ADSentinel   │
+│  (PowerShell) │     │  Flask App    │
+└──────────────┘     └──────┬───────┘
+                            │
+              ┌─────────────┼─────────────┐
+              ▼             ▼             ▼
+       ┌──────────┐  ┌──────────┐  ┌──────────┐
+       │  Admin    │  │  Public   │  │  Mock    │
+       │Dashboard  │  │Status Page│  │  Mode    │
+       └──────────┘  └──────────┘  └──────────┘
 ```
 
-## 🔧 API
+## Documentation
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | Admin dashboard with full DC metrics |
-| `/public` | GET | Public status page |
-
-## 📡 Data Collection
-
-### PowerShell Collector
-Gathers: DC status, replication status, service health, performance counters.
-
-### Mock Data
-For development without an Active Directory environment, use `mock_dc_status.json`.
-
-## 🐳 Deployment
-
-```bash
-docker build -t adsentinel .
-docker run -d -p 5000:5000 adsentinel
-```
-
-## 📄 License
-
-MIT © Jhonattan L. Jimenez
+| Doc | Description |
+|---|---|
+| [Setup Guide](docs/setup.md) | Installation and configuration |
+| [DC Configuration](docs/dcs.md) | Connecting to your Domain Controllers |
 
 ---
 
-<div align="center">
-  <p>Built with ❤️ for IT operations teams</p>
-  <p><a href="https://github.com/OneByJorah">@OneByJorah</a></p>
-</div>
+## License
+
+MIT © JorahOne, LLC — see [LICENSE](LICENSE)
+
+<sub>Part of the JorahOne infrastructure ecosystem.</sub>
