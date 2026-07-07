@@ -1,4 +1,4 @@
-"""Smoke tests for ADSentinel Flask application."""
+"""Smoke tests for DirWatch Flask application."""
 
 import json
 import os

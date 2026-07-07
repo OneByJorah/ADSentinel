@@ -1,6 +1,6 @@
 # Phase 0 — CLASSIFIER Report
 
-**Repository:** `OneByJorah/ADSentinel`
+**Repository:** `OneByJorah/DirWatch`
 **Date:** 2026-07-05
 **Analyst:** J1-PIPELINE CLASSIFIER
 
@@ -18,7 +18,7 @@
 
 ### Classification Rationale
 
-ADSentinel is primarily a **monitoring dashboard** — a single-page web application that provides IT operations teams with at-a-glance visibility into Active Directory Domain Controller health. The core deliverable is the dashboard UI (`/` route) and public status page (`/public` route), making `Dashboard` the most specific and accurate classification.
+DirWatch is primarily a **monitoring dashboard** — a single-page web application that provides IT operations teams with at-a-glance visibility into Active Directory Domain Controller health. The core deliverable is the dashboard UI (`/` route) and public status page (`/public` route), making `Dashboard` the most specific and accurate classification.
 
 | Aspect | Evidence |
 |--------|----------|

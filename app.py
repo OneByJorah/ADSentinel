@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MIT
 # SPDX-FileCopyrightText: 2026 OneByJorah
 #
-# ADSentinel — Active Directory Domain Controller Monitoring Dashboard
+# DirWatch — Active Directory Domain Controller Monitoring Dashboard
 """Flask web server serving the admin dashboard and public status page."""
 
 import json

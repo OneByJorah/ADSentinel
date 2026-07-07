@@ -1,6 +1,6 @@
 # Phase 3 — GUARDIAN (Security) Report
 
-**Repository:** `OneByJorah/ADSentinel`
+**Repository:** `OneByJorah/DirWatch`
 **Date:** 2026-07-05
 **Analyst:** J1-PIPELINE GUARDIAN
 

@@ -1,6 +1,6 @@
 # Phase 1 — AUDITOR Report
 
-**Repository:** `OneByJorah/ADSentinel`
+**Repository:** `OneByJorah/DirWatch`
 **Date:** 2026-07-05
 **Analyst:** J1-PIPELINE AUDITOR
 
@@ -146,7 +146,7 @@ Remove `npm` and `docker` from Dependabot config until those artifacts exist. Ad
 
 - **README exists** — Yes, comprehensive with badges, features, quick start, architecture, API, deployment
 - **Missing `.env.example`** — Referenced in INTENT.md but file does not exist on disk
-- **Docker instructions without Dockerfile** — README shows `docker build -t adsentinel .` but no `Dockerfile` exists
+- **Docker instructions without Dockerfile** — README shows `docker build -t dirwatch .` but no `Dockerfile` exists
 - **No health endpoint documented** — The `/health` endpoint exists in code but is not documented in the API table
 - **No testing section** — No instructions for running tests
 - **No contributing section** — README doesn't link to CONTRIBUTING.md
@@ -163,7 +163,7 @@ Create `.env.example`, add `/health` to API table, add testing/contributing/secu
 ### Findings
 
 - **No test files on `main` branch** — Zero test files in the repository
-- **Smoke tests exist on `audit/ADSentinel` branch** — 3 tests (dashboard route, public route, app config) pass but are not merged to `main`
+- **Smoke tests exist on `audit/DirWatch` branch** — 3 tests (dashboard route, public route, app config) pass but are not merged to `main`
 - **No test framework configured** — No `pytest`, `unittest`, or test runner config
 
 ### Recommendation
@@ -175,7 +175,7 @@ Merge smoke tests from audit branch to main. Add `pytest` configuration.
 
 ### Findings
 
-- **No Dockerfile exists** — Despite README claiming `docker build -t adsentinel .`
+- **No Dockerfile exists** — Despite README claiming `docker build -t dirwatch .`
 - **No `.dockerignore`** — Would be needed if Dockerfile existed
 - **Dependabot configured for `docker`** — Template vestige, no Docker artifacts to update
 

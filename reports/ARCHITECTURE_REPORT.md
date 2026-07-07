@@ -1,6 +1,6 @@
 # Phase 2 — ARCHITECTURE Report
 
-**Repository:** `OneByJorah/ADSentinel`
+**Repository:** `OneByJorah/DirWatch`
 **Date:** 2026-07-05
 **Analyst:** J1-PIPELINE ARCHITECT
 
@@ -8,7 +8,7 @@
 
 ## Architecture Overview
 
-ADSentinel uses a **single-process Flask architecture** with two Jinja2 HTML templates and file-based mock data. There is no database, no message queue, no container orchestration, and no API layer beyond the Flask routes.
+DirWatch uses a **single-process Flask architecture** with two Jinja2 HTML templates and file-based mock data. There is no database, no message queue, no container orchestration, and no API layer beyond the Flask routes.
 
 ```
 ┌─────────────────────────────────────────────────────┐

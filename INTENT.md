@@ -1,6 +1,6 @@
 # INTENT.md — J1-PIPELINE Phase -1 (ORACLE)
 
-**Repository:** `OneByJorah/ADSentinel`
+**Repository:** `OneByJorah/DirWatch`
 **Analysis Date:** 2026-07-05
 **Analyst:** J1-PIPELINE ORACLE (read-only)
 **Status:** Intent Reconstructed
@@ -9,7 +9,7 @@
 
 ## What This System Does
 
-ADSentinel is a **lightweight, self-hosted Active Directory Domain Controller monitoring dashboard** — a single Flask process serving two interfaces:
+DirWatch is a **lightweight, self-hosted Active Directory Domain Controller monitoring dashboard** — a single Flask process serving two interfaces:
 
 | Interface | Route | Purpose |
 |-----------|-------|---------|
@@ -27,7 +27,7 @@ A **mock mode** (via `mock_dc_status.json`) allows the dashboard to run fully of
 
 ### Operational Role
 
-ADSentinel is consumed by **IT operations teams and system administrators** who need a single-pane-of-glass view of their Active Directory health. It solves the runtime problem of "is my AD infrastructure healthy right now?" without requiring SSH/RDP access to individual domain controllers or a full enterprise monitoring stack.
+DirWatch is consumed by **IT operations teams and system administrators** who need a single-pane-of-glass view of their Active Directory health. It solves the runtime problem of "is my AD infrastructure healthy right now?" without requiring SSH/RDP access to individual domain controllers or a full enterprise monitoring stack.
 
 ---
 
@@ -53,22 +53,22 @@ Existing monitoring solutions for AD fall into two categories, both problematic:
 
 The initial commit (03e86ad, Feb 4 2026) was titled "Add files via upload" and described the repo as a **"starter version"** of a DC monitoring dashboard — explicitly "SAFE to upload publicly to GitHub" with no credentials, no domain names, no secrets. The original README listed next phases: add PowerShell collector, add authentication, add database, add alerts.
 
-The repo was **renamed** from its original name to `ADSentinel` (commit `d951861`, June 17 2026), indicating a branding and scoping decision to make it a standalone, publishable tool rather than an internal prototype. The rename aligned it with the JorahOne portfolio naming convention.
+The repo was **renamed** from its original name to `DirWatch` (commit `d951861`, June 17 2026), indicating a branding and scoping decision to make it a standalone, publishable tool rather than an internal prototype. The rename aligned it with the JorahOne portfolio naming convention.
 
 Subsequent development followed a J1 Pipeline pattern:
 - **June 30, 2026** — CI/health endpoint added (ADS-001, ADS-002, ADS-003 tickets), review findings captured, screenshot updated
 - **July 4, 2026** — Portfolio standardization: community files (SECURITY.md, CONTRIBUTING.md, CODE_OF_CONDUCT.md), CI/CD (CodeQL, Dependabot), CHANGELOG, issue/PR templates
 - **July 5, 2026** — Security audit: secret scan, smoke tests (3/3 passing), `.env.example`, config standardization
 
-The rapid standardization suggests ADSentinel was being prepared for **public open-source release** as a first-class JorahOne project.
+The rapid standardization suggests DirWatch was being prepared for **public open-source release** as a first-class JorahOne project.
 
 ### Ecosystem Fit
 
-ADSentinel is part of JorahOne's **infrastructure observability and automation** portfolio:
+DirWatch is part of JorahOne's **infrastructure observability and automation** portfolio:
 
 ```
 JorahOne Ecosystem
-├── ADSentinel              ← AD-specific monitoring dashboard
+├── DirWatch              ← AD-specific monitoring dashboard
 ├── [other infra tools]     ← Broader infrastructure monitoring/automation
 └── J1 Pipeline             ← Lifecycle management for all J1 repos
 ```
@@ -97,8 +97,8 @@ Evidence for **Production**:
 Evidence for **Experimental** (countervailing):
 - `mock_dc_status.json` is an empty array `[]` — the dashboard renders hardcoded HTML data, not dynamic template data
 - `ldap_service.ps1` and `notifications.ps1` are single-line placeholders
-- **No Dockerfile exists** despite README claiming `docker build -t adsentinel .`
-- No test suite in current HEAD (tests exist on `audit/ADSentinel` branch but not merged to main)
+- **No Dockerfile exists** — Despite README claiming `docker build -t dirwatch .`
+- No test suite in current HEAD (tests exist on `audit/DirWatch` branch but not merged to main)
 - No real AD data pipeline — the Flask app loads mock data but the template doesn't consume it dynamically
 - The dashboard HTML contains hardcoded example data (DC-East, DC-West, DC-Central, DC-Factory) rather than rendering from the JSON payload
 - `docs/` files are placeholders ("Roadmap placeholder", "GitHub steps placeholder")
@@ -128,7 +128,7 @@ Evidence for **Experimental** (countervailing):
 ## Repository Structure
 
 ```
-ADSentinel/
+DirWatch/
 ├── app.py                       # Flask web server (20 LOC, single file)
 ├── requirements.txt             # Dependency: flask
 ├── mock_dc_status.json          # Mock data file (currently empty array [])
@@ -166,11 +166,11 @@ ADSentinel/
 
 ## Notes
 
-- **Naming history:** The repo was originally named something other than ADSentinel (likely "DC Status Dashboard" or similar). It was renamed to ADSentinel in commit `d951861` (June 17, 2026). The initial README explicitly called it a "starter version" safe for public upload.
+- **Naming history:** The repo was originally named something other than DirWatch (likely "DC Status Dashboard" or similar). It was renamed to DirWatch in commit `d951861` (June 17, 2026). The initial README explicitly called it a "starter version" safe for public upload.
 
 - **Dependabot ecosystem mismatch:** Dependabot is configured for `npm` and `docker` ecosystems, but no `package.json` or `Dockerfile` exists in the repo. This is a template vestige from the J1 portfolio standardization — the npm and docker entries should be removed until those artifacts exist.
 
-- **No Dockerfile despite README claim:** The README includes `docker build -t adsentinel .` instructions, but no `Dockerfile` exists. This is a documentation gap.
+- **No Dockerfile despite README claim:** The README includes `docker build -t dirwatch .` instructions, but no `Dockerfile` exists. This is a documentation gap.
 
 - **Dashboard data is hardcoded, not dynamic:** The Flask app loads `mock_dc_status.json` and passes it as `dc_data` to the template, but `dashboard.html` renders hardcoded example DCs (DC-East, DC-West, DC-Central, DC-Factory) rather than iterating over `dc_data`. The mock data pipeline exists in code but is not wired to the UI.
 
@@ -178,11 +178,11 @@ ADSentinel/
 
 - **Security audit in history:** Commit `07815b7` (July 5, 2026) performed a security audit including secret scan, placeholder IP/email replacement, and config standardization. This is a positive maturity signal.
 
-- **Pipeline branches exist:** `audit/ADSentinel`, `brand-align/ADSentinel`, `pipeline/auto-review-ADSentinel-2026-06-30` — indicating J1 Pipeline phases have been run on this repo.
+- **Pipeline branches exist:** `audit/DirWatch`, `brand-align/DirWatch`, `pipeline/auto-review-DirWatch-2026-06-30` — indicating J1 Pipeline phases have been run on this repo.
 
 - **No git tags:** Despite a v1.0.0 CHANGELOG entry, no corresponding git tag exists.
 
-- **Smoke tests exist on audit branch:** 3 tests (dashboard route, public route, app config) pass on the `audit/ADSentinel` branch but are not merged to `main`.
+- **Smoke tests exist on audit branch:** 3 tests (dashboard route, public route, app config) pass on the `audit/DirWatch` branch but are not merged to `main`.
 
 ---
 
