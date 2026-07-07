@@ -21,6 +21,11 @@
 
 ---
 
+## 📸 Screenshot
+
+![ADSentinel Dashboard](docs/screenshot.png)
+*Active Directory Domain Controller monitoring dashboard with health status, replication tracking, and alerting*
+
 ## ✨ Features
 
 - **Domain Controller Health Monitoring** — Real-time status of all DCs in your forest

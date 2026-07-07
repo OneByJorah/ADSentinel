@@ -1,0 +1,29 @@
+# =============================================================================
+# ADSentinel — docker-compose.yml
+# =============================================================================
+
+services:
+  adsentinel:
+    image: jorahone/adsentinel:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: adsentinel
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      # Mock DC status data (can be replaced with real data)
+      - ./mock_dc_status.json:/app/mock_dc_status.json:ro
+    environment:
+      - FLASK_ENV=${FLASK_ENV:-production}
+    networks:
+      - adsentinel_net
+
+volumes:
+  adsentinel_data:
+    driver: local
+
+networks:
+  adsentinel_net:
+    driver: bridge
