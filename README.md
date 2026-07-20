@@ -7,7 +7,7 @@
 <br>
 
 <div align="center">
-  <h1>🛡️ ADSentinel</h1>
+  <h1>🛡️ DirWatch</h1>
   <p><strong>Active Directory Domain Controller Monitoring Dashboard</strong></p>
   <p>Real-time visibility into DC health, replication status, and alerting — self-hosted & lightweight</p>
   <p>
@@ -46,8 +46,8 @@
 ### Installation
 
 ```bash
-git clone https://github.com/OneByJorah/ADSentinel.git
-cd ADSentinel
+git clone https://github.com/OneByJorah/DirWatch.git
+cd DirWatch
 pip install flask
 python3 app.py
 ```
@@ -57,7 +57,7 @@ Open **http://localhost:5000** for the admin dashboard or **http://localhost:500
 ## 🏗️ Architecture
 
 ```
-ADSentinel/
+DirWatch/
 ├── app.py                       # Flask web server
 ├── requirements.txt             # Python dependencies
 ├── templates/                   # Jinja2 HTML templates
@@ -93,7 +93,7 @@ docker run -d -p 5000:5000 adsentinel
 
 ## 📄 License
 
-MIT © Jhonattan L. Jimenez
+MIT © Jhonattan L. Jimenez / JorahOne LLC
 
 ---
 
