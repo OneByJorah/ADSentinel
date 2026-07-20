@@ -1,12 +1,14 @@
-repo: ADSentinel
+repo: DirWatch
 class: Monitoring / Dashboard
 org: OneByJorah
 owner: Jhonattan L. Jimenez
 license: MIT
-production_score: 72
-last_audit: "2026-07-05"
+production_score: 85
+last_audit: "2026-07-20"
 standards_version: "2.1"
-dependencies: []
-deploy_target: scratch
+dependencies:
+  - flask
+  - gunicorn
+deploy_target: docker
 mesh_vpn_only: false
-public_facing: false
+public_facing: true

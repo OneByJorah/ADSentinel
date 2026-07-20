@@ -1,29 +1,32 @@
 # =============================================================================
-# ADSentinel — docker-compose.yml
+# DirWatch — docker-compose.yml
 # =============================================================================
 
 services:
-  adsentinel:
-    image: jorahone/adsentinel:latest
+  dirwatch:
+    image: jorahone/dirwatch:latest
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: adsentinel
+    container_name: dirwatch
     restart: unless-stopped
     ports:
       - "5000:5000"
     volumes:
-      # Mock DC status data (can be replaced with real data)
+      # Mock DC status data (can be replaced with real collector output)
       - ./mock_dc_status.json:/app/mock_dc_status.json:ro
     environment:
       - FLASK_ENV=${FLASK_ENV:-production}
+      - STATUS_FILE=/app/mock_dc_status.json
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     networks:
-      - adsentinel_net
-
-volumes:
-  adsentinel_data:
-    driver: local
+      - dirwatch_net
 
 networks:
-  adsentinel_net:
+  dirwatch_net:
     driver: bridge

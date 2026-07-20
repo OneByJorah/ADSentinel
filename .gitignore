@@ -1,22 +1,31 @@
-# Dependencies
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
 .venv/
 venv/
-node_modules/
-# Environment
+env/
+
+# Env / secrets
 .env
-.env.local
-# IDE
-.vscode/
+*.pem
+*.key
+*.pfx
+
+# Editor / OS
 .idea/
-# OS
+.vscode/
+*.swp
+*.swo
 .DS_Store
-Thumbs.db
-# Build
-dist/
-build/
-*.egg-info/
-*.so
+
 # Logs
 *.log
+
+# Docker
+.dockerignore
+
+# Build artifacts
+dist/
+build/

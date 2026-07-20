@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "name": "DC-East",
+    "subnet": "192.168.1.0/24",
+    "role": "Primary",
+    "status": "online",
+    "cpu": 78,
+    "services": { "DNS": "Running", "DHCP": "Running", "ADWS": "Stopped" }
+  },
+  {
+    "name": "DC-West",
+    "subnet": "192.168.2.0/24",
+    "role": "Secondary",
+    "status": "online",
+    "cpu": 41,
+    "services": { "DNS": "Running", "DHCP": "Stopped", "ADWS": "Running" }
+  },
+  {
+    "name": "DC-Central",
+    "subnet": "192.168.3.0/24",
+    "role": "Backup",
+    "status": "offline",
+    "cpu": 0,
+    "services": { "DNS": "Stopped", "DHCP": "Stopped", "ADWS": "Stopped" }
+  },
+  {
+    "name": "DC-Factory",
+    "subnet": "192.168.4.0/24",
+    "role": "Industrial",
+    "status": "offline",
+    "cpu": 0,
+    "services": { "DNS": "Stopped", "DHCP": "Stopped", "ADWS": "Stopped" }
+  }
+]
