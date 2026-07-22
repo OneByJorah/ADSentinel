@@ -1,56 +1,56 @@
-# ADSentinel
+# ADSentinel (DirWatch)
 
-![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
-![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
-![Flask](https://img.shields.io/badge/Flask-000000?logo=flask&logoColor=white)
+Active Directory Domain Controller monitoring dashboard — real-time DC health, replication status, and alerting.
 
-Active Directory Domain Controller monitoring dashboard. Real-time visibility into DC health, replication status, and alerting — self-hosted and lightweight.
+![status](https://img.shields.io/badge/status-active-FFB300?style=flat-square)
+![language](https://img.shields.io/badge/python-3.10+-0d0d0c?style=flat-square)
+![license](https://img.shields.io/badge/license-MIT-FFB300?style=flat-square)
+
+## Overview
+
+ADSentinel is a self-hosted Active Directory Domain Controller monitoring dashboard that provides real-time visibility into DC health, replication status, and alerting. Built with Flask and Jinja2 templates, it includes PowerShell collectors for live AD data, a public status page, and mock mode for development without a live AD environment.
 
 ## Features
 
-- Domain Controller health monitoring
-- Replication status tracking
+- Domain Controller health monitoring with real-time metrics
+- Replication status tracking across all DCs
 - Built-in alerting for failures and outages
-- Public status page
+- Public status page for stakeholder visibility
 - Mock mode for development without live AD
-- Admin dashboard with full metrics
-- PowerShell collectors for live AD data
+- Admin dashboard with full metrics and historical data
+- PowerShell collectors for live AD data ingestion
+- Docker Compose deployment
 
-## Tech Stack
+## Architecture / Tech Stack
 
-- Python 3.10+
-- Flask
-- Jinja2 templates
-- Docker / Docker Compose
+- **Backend**: Flask (Python 3.10+)
+- **Templates**: Jinja2
+- **Collectors**: PowerShell (AD data)
+- **Deployment**: Docker Compose, local install
 
 ## Installation
 
 ```bash
-git clone https://github.com/OneByJorah/ADSentinel.git
-cd ADSentinel
+git clone https://github.com/OneByJorah/DirWatch.git
+cd DirWatch
+
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
 cp .env.example .env
-# Edit .env as needed
-```
-
-## Usage
-
-```bash
 python3 app.py
 ```
 
-Open **http://localhost:5000** for the admin dashboard or **http://localhost:5000/public** for the public status page.
-
-### Docker
-
+Or with Docker:
 ```bash
 docker compose up -d
 ```
 
-## Environment Variables
+- Admin dashboard: `http://localhost:5000`
+- Public status page: `http://localhost:5000/public`
+
+## Configuration
 
 | Variable | Default | Description |
 |----------|---------|-------------|
@@ -58,34 +58,9 @@ docker compose up -d
 | `PORT` | `5000` | Dashboard port |
 | `HOST` | `0.0.0.0` | Bind address |
 
-## API
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/` | GET | Admin dashboard |
-| `/public` | GET | Public status page |
-
-## Project Structure
-
-```
-ADSentinel/
-├── app.py                 # Flask web server
-├── requirements.txt       # Python dependencies
-├── templates/             # Jinja2 templates
-├── collectors/            # AD data collectors (PowerShell)
-├── docs/                  # Documentation
-├── assets/                # Static assets
-└── mock_dc_status.json    # Mock data for development
-```
-
-## Contributing
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Security
-
-Report vulnerabilities privately to **info@jorahone.com**. See [SECURITY.md](SECURITY.md).
-
 ## License
 
-MIT © Jhonattan L. Jimenez
+MIT — see [LICENSE](LICENSE).
+
+---
+Part of the JorahOne / J1 ecosystem — AD monitoring for enterprise Windows environments.
